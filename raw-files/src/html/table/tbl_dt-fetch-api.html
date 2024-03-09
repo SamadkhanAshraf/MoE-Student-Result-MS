@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    @@include('../layouts/head.html')
+    <link rel="stylesheet" href="../assets/css/plugins/style.css">
+    @@include('../layouts/head-bottom-link.html')
+
+</head>
+
+@@include('../layouts/main.html')
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <div class="page-header">
+                    <div class="page-block">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <div class="page-header-title">
+                                    <h5 class="m-b-10">Fetch API</h5>
+                                </div>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html"><i
+                                                class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="#!">Table</a></li>
+                                    <li class="breadcrumb-item"><a href="#!">Fetch API</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- [ basic-table ] start -->
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Fetch API</h5>
+                                    </div>
+                                    <div class="card-block table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table" id="pc-dt-fetchapi">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ basic-table ] end -->
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+
+@@include('../layouts/footer.html')
+<script src="../assets/js/plugins/simple-datatables.js"></script>
+<!-- <script>
+    const dataTable = new simpleDatatables.DataTable("#pc-dt-fetchapi");
+</script> -->
+<script>
+    fetch('../../assets/json/datatable.json')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.length) {
+                return
+            }
+
+            let table = new simpleDatatables.DataTable("#pc-dt-fetchapi", {
+                data: {
+                    headings: Object.keys(data[0]),
+                    data: data.map(item => Object.values(item))
+                },
+            })
+        })
+</script>
+@@include('../layouts/footer-bottom-link.html')
+
+</body>
+
+</html>
